@@ -16,6 +16,6 @@ class WidgetItem extends Model
 
     public function widget()
     {
-        return $this->belongsTo(Config::get('widget.widget'));
+        return $this->belongsTo(Config::get('widget.widget'), 'widget_id');
     }
 }

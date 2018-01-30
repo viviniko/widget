@@ -7,7 +7,6 @@ class WidgetTypes
     const MENU = 'Menu';
     const LIST = 'List';
     const SINGLE = 'Single';
-    const PRODUCT = 'Product';
 
     public static function values()
     {
@@ -15,7 +14,6 @@ class WidgetTypes
             static::MENU => 'Menu',
             static::LIST => 'List',
             static::SINGLE => 'Single',
-            static::PRODUCT => 'Product'
         ];
     }
 }

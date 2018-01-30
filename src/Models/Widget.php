@@ -8,11 +8,12 @@ class Widget extends Model
 {
     protected $tableConfigKey = 'widget.widgets_table';
 
-    protected $fillable = ['name', 'display_name', 'type', 'description', 'url', 'target', 'image', 'fields'];
+    protected $fillable = ['model_id', 'name', 'display_name', 'type', 'description', 'url', 'target', 'image'];
 
-    protected $casts = [
-        'fields' => 'array',
-    ];
+    public function widgetModel()
+    {
+        return $this->hasOne(Config::get('widget.widget_model'), 'model_id');
+    }
 
     public function items()
     {
