@@ -1,0 +1,83 @@
+<?php
+
+namespace Viviniko\Widget;
+
+use Illuminate\Support\ServiceProvider;
+use Viviniko\Widget\Console\Commands\WidgetTableCommand;
+
+class WidgetServiceProvider extends ServiceProvider
+{
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // Publish config files
+        $this->publishes([
+            __DIR__ . '/../config/widget.php' => config_path('widget.php'),
+        ]);
+
+        // Register commands
+        $this->commands('command.widget.table');
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/widget.php', 'widget');
+
+        $this->registerRepositories();
+
+        $this->registerWidgetService();
+
+        $this->registerCommands();
+    }
+
+    protected function registerRepositories()
+    {
+        $this->app->singleton(
+            \Viviniko\Widget\Repositories\Widget\WidgetRepository::class,
+            \Viviniko\Widget\Repositories\Widget\EloquentWidget::class
+        );
+
+        $this->app->singleton(
+            \Viviniko\Widget\Repositories\WidgetItem\WidgetItemRepository::class,
+            \Viviniko\Widget\Repositories\WidgetItem\EloquentWidgetItem::class
+        );
+    }
+
+    private function registerWidgetService()
+    {
+        $this->app->singleton('widget', \Viviniko\Widget\Services\Widget\WidgetServiceImpl::class);
+
+        $this->app->alias('widget', \Viviniko\Widget\Contracts\WidgetService::class);
+    }
+
+    private function registerCommands()
+    {
+        $this->app->singleton('command.widget.table', function ($app) {
+            return new WidgetTableCommand($app['files'], $app['composer']);
+        });
+    }
+
+    public function provides()
+    {
+        return [
+            'widget',
+            \Viviniko\Widget\Contracts\WidgetService::class,
+        ];
+    }
+}

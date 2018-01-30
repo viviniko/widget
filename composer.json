@@ -1,0 +1,32 @@
+{
+    "name": "viviniko/widget",
+    "description": "VIVINIKO Widget Service Provider",
+	"keywords": ["viviniko", "widget", "laravel"],
+	"homepage": "http://viviniko.com",
+	"license": "MIT",
+	"authors": [
+        {
+            "name": "viviniko",
+            "email": "viviniko.shop@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "viviniko/repository": "dev-master",
+        "viviniko/support": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Viviniko\\Widget": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Viviniko\\Widget\\WidgetServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
