@@ -14,7 +14,7 @@ class EloquentWidgetModel extends SimpleRepository implements WidgetModelReposit
     /**
      * {@inheritdoc}
      */
-    public function lists($column = 'display_name', $key = null)
+    public function lists($column = 'name', $key = null)
     {
         return $this->pluck($column, $key);
     }
