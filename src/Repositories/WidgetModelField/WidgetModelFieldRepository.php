@@ -4,8 +4,6 @@ namespace Viviniko\Widget\Repositories\WidgetModelField;
 
 interface WidgetModelFieldRepository
 {
-    public function lists($column = 'display_name', $key = null);
-
     /**
      * Find widget model field by its id.
      *
