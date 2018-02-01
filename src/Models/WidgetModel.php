@@ -8,7 +8,11 @@ class WidgetModel extends Model
 {
     protected $tableConfigKey = 'widget.widget_models_table';
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'is_system'];
+
+    protected $casts = [
+        'is_system' => 'boolean',
+    ];
 
     public function fields()
     {

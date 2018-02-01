@@ -49,6 +49,16 @@ class WidgetServiceProvider extends ServiceProvider
     protected function registerRepositories()
     {
         $this->app->singleton(
+            \Viviniko\Widget\Repositories\WidgetModel\WidgetModelRepository::class,
+            \Viviniko\Widget\Repositories\WidgetModel\EloquentWidgetModel::class
+        );
+
+        $this->app->singleton(
+            \Viviniko\Widget\Repositories\WidgetModelField\WidgetModelFieldRepository::class,
+            \Viviniko\Widget\Repositories\WidgetModelField\EloquentWidgetModelField::class
+        );
+
+        $this->app->singleton(
             \Viviniko\Widget\Repositories\Widget\WidgetRepository::class,
             \Viviniko\Widget\Repositories\Widget\EloquentWidget::class
         );
