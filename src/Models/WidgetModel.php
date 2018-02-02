@@ -3,6 +3,7 @@ namespace Viviniko\Widget\Models;
 
 use Illuminate\Support\Facades\Config;
 use Viviniko\Support\Database\Eloquent\Model;
+use Viviniko\Widget\Enums\WidgetModelTypes;
 
 class WidgetModel extends Model
 {
@@ -13,6 +14,11 @@ class WidgetModel extends Model
     protected $casts = [
         'is_system' => 'boolean',
     ];
+
+    public function isFieldType()
+    {
+        return $this->type == WidgetModelTypes::FIELD;
+    }
 
     public function fields()
     {
