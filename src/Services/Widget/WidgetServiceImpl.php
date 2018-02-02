@@ -32,15 +32,11 @@ class WidgetServiceImpl implements WidgetService
 
     public function getWidgetData($widgetId)
     {
-        $widget = $this->widgetRepository->find($widgetId);
-        $data = [];
-        if ($widget->widgetModel->isProductType()) {
-            $data = [];
-        } else if ($widget->widgetModel->isFieldType()) {
-            $data = $widget->items->map(function ($item) { return $item->getData(); });
+        if ($widget = $this->widgetRepository->find($widgetId)) {
+            $widget->items->map(function ($item) { return $item->getData(); });
         }
 
-        return $data;
+        return false;
     }
 
     public function buildTreeByWidgetId($widgetId, $parentId = null, $parentKey = 'parent_id') {
