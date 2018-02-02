@@ -8,7 +8,7 @@ class WidgetItem extends Model
 {
     protected $tableConfigKey = 'widget.widget_items_table';
 
-    protected $fillable = ['widget_id', 'theme', 'sort', 'data'];
+    protected $fillable = ['widget_id', 'sort', 'data'];
 
     protected $casts = [
         'data' => 'array',

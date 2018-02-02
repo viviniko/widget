@@ -12,7 +12,7 @@ class Widget extends Model
 
     public function widgetModel()
     {
-        return $this->hasOne(Config::get('widget.widget_model'), 'model_id');
+        return $this->belongsTo(Config::get('widget.widget_model'), 'model_id');
     }
 
     public function items()
