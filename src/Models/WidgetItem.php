@@ -21,7 +21,17 @@ class WidgetItem extends Model
 
     public function getData()
     {
-        $data = (object)$this->data;
+        static $items = [];
+        $data = $this->data;
+        if (!empty($data['__item_id'])) {
+            if (!isset($items[$data['__item_id']])) {
+                $items[$data['__item_id']] = app(\Viviniko\Catalog\Repositories\Item\ItemRepository::class)->find($data['__item_id']);
+            }
+            if (!empty($items[$data['__item_id']])) {
+                $data = array_merge($items[$data['__item_id']]->toArray(), $data);
+            }
+        }
+        $data = (object)$data;
         $data->id = $this->id;
         $data->sort = $this->sort;
 
