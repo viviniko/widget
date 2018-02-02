@@ -18,4 +18,13 @@ class WidgetItem extends Model
     {
         return $this->belongsTo(Config::get('widget.widget'), 'widget_id');
     }
+
+    public function getData()
+    {
+        $data = (object)$this->data;
+        $data->id = $this->id;
+        $data->sort = $this->sort;
+
+        return $data;
+    }
 }
