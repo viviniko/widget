@@ -20,6 +20,11 @@ class WidgetModel extends Model
         return $this->type == WidgetModelTypes::FIELD;
     }
 
+    public function isProductType()
+    {
+        return $this->type == WidgetModelTypes::PRODUCT;
+    }
+
     public function fields()
     {
         return $this->hasMany(Config::get('widget.widget_model_field'), 'model_id');
