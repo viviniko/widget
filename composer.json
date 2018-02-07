@@ -24,7 +24,10 @@
         "laravel": {
             "providers": [
                 "Viviniko\\Widget\\WidgetServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Widget": "Viviniko\\Widget\\Facades\\Widget"
+            }
         }
     },
     "minimum-stability": "dev",
