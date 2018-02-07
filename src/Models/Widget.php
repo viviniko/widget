@@ -8,7 +8,12 @@ class Widget extends Model
 {
     protected $tableConfigKey = 'widget.widgets_table';
 
-    protected $fillable = ['model_id', 'name', 'display_name', 'type', 'description', 'url', 'target', 'image'];
+    protected $fillable = ['group_id', 'model_id', 'name', 'display_name', 'type', 'description', 'url', 'target', 'image'];
+
+    public function group()
+    {
+        return $this->belongsTo(Config::get('widget.widget_group', 'group_id'));
+    }
 
     public function widgetModel()
     {

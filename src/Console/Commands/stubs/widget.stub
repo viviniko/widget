@@ -15,6 +15,11 @@ class CreateWidgetTable extends Migration
     /**
      * @var string
      */
+    protected $widgetGroupsTable;
+
+    /**
+     * @var string
+     */
     protected $widgetModelsTable;
 
     /**
@@ -33,6 +38,7 @@ class CreateWidgetTable extends Migration
     public function __construct()
     {
         $this->widgetsTable = Config::get('widget.widgets_table');
+        $this->widgetGroupsTable = Config::get('widget.widget_groups_table');
         $this->widgetModelsTable = Config::get('widget.widget_models_table');
         $this->widgetModelFieldsTable = Config::get('widget.widget_model_fields_table');
         $this->widgetItemsTable = Config::get('widget.widget_items_table');
@@ -45,6 +51,15 @@ class CreateWidgetTable extends Migration
      */
     public function up()
     {
+        Schema::create($this->widgetGroupsTable, function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 32)->unique();
+            $table->string('display_name', 64);
+            $table->string('description')->nullable();
+            $table->boolean('is_system')->default(false);
+            $table->timestamps();
+        });
+
         Schema::create($this->widgetModelsTable, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 32)->unique();
@@ -68,6 +83,7 @@ class CreateWidgetTable extends Migration
 
         Schema::create($this->widgetsTable, function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('group_id');
             $table->unsignedInteger('model_id');
             $table->string('name', 32)->unique();
             $table->string('display_name')->nullable();
@@ -95,7 +111,10 @@ class CreateWidgetTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists($this->widgetGroupsTable);
         Schema::dropIfExists($this->widgetItemsTable);
         Schema::dropIfExists($this->widgetsTable);
+        Schema::dropIfExists($this->widgetModelFieldsTable);
+        Schema::dropIfExists($this->widgetModelsTable);
     }
 }

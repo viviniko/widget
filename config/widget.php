@@ -9,6 +9,8 @@ return [
 
     'widget_item' => 'Viviniko\Widget\Models\WidgetItem',
 
+    'widget_group' => 'Viviniko\Widget\Models\WidgetGroup',
+
     'widgets_table' => 'widget_widgets',
 
     'widget_models_table' => 'widget_models',
@@ -16,4 +18,6 @@ return [
     'widget_model_fields_table' => 'widget_model_fields',
 
     'widget_items_table' => 'widget_items',
+
+    'widget_groups_table' => 'widget_groups',
 ];
