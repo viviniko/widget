@@ -37,7 +37,16 @@ class WidgetViewer
 
     public function render($template = null)
     {
-        $this->template = $template ?: "widgets.{$this->widget->name}";
+        if (!$template) {
+            foreach (["widgets.{$this->widget->group->name}.{$this->widget->name}", "widgets.{$this->widget->name}"] as $view) {
+                if (view()->exists($view)) {
+                    $template = $view;
+                    break;
+                }
+            }
+        }
+
+        $this->template = $template;
 
         return view($this->template, array_merge($this->widget->getAttributes(), [
             ($this->widget->type == 'Single' ? 'item' : 'items') => $this->items()
