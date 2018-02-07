@@ -18,4 +18,12 @@ class EloquentWidgetGroup extends SimpleRepository implements WidgetGroupReposit
     {
         return $this->createModel()->get();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function lists($column = 'name', $key = null)
+    {
+        return $this->pluck($column, $key);
+    }
 }

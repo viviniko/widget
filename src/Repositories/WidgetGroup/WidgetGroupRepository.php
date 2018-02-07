@@ -12,6 +12,13 @@ interface WidgetGroupRepository
     public function all();
 
     /**
+     * @param string $column
+     * @param null $key
+     * @return mixed
+     */
+    public function lists($column = 'display_name', $key = null);
+
+    /**
      * Find widget model by its id.
      *
      * @param $id
