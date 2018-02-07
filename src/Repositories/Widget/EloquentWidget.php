@@ -11,7 +11,10 @@ class EloquentWidget extends SimpleRepository implements WidgetRepository
      */
     protected $modelConfigKey = 'widget.widget';
 
-    protected $fieldSearchable = ['id', 'name', 'display_name', 'type'];
+    /**
+     * @var array
+     */
+    protected $fieldSearchable = ['id', 'group_id', 'name', 'display_name', 'type'];
 
     /**
      * Find widget by given name.
