@@ -33,7 +33,7 @@ class WidgetServiceImpl implements WidgetService
     public function getWidgetData($widgetId)
     {
         if ($widget = $this->widgetRepository->find($widgetId)) {
-            $widget->items->map(function ($item) { return $item->getData(); });
+            return $widget->items->map(function ($item) { return $item->getData(); });
         }
 
         return false;
