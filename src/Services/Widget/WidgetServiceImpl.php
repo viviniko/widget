@@ -4,6 +4,7 @@ namespace Viviniko\Widget\Services\Widget;
 use Illuminate\Support\Collection;
 use Viviniko\Catalog\Contracts\ProductService;
 use Viviniko\Widget\Contracts\WidgetService;
+use Viviniko\Widget\Enums\WidgetTypes;
 use Viviniko\Widget\Repositories\Widget\WidgetRepository;
 
 class WidgetServiceImpl implements WidgetService
@@ -42,13 +43,21 @@ class WidgetServiceImpl implements WidgetService
     public function buildTreeByWidgetId($widgetId, $parentId = null, $parentKey = 'parent_id') {
         $widget = $this->widgetRepository->find($widgetId);
 
-        $collection = $widget->items->map(function ($widgetItem) {
+        $collection = $widget->items->map(function ($widgetItem) use ($widget) {
             $data = $widgetItem->getData();
             if (!property_exists($data, 'parent_id')) {
                 $data->parent_id = 0;
             }
             if (!property_exists($data, 'text')) {
                 $data->text = data_get($data, 'title') ?? data_get($data, 'name');
+            }
+            if (!property_exists($data, 'url')) {
+                $data->url = data_get($data, 'link') ?? data_get($data, 'href');
+            }
+            if ($widget->type === WidgetTypes::MENU) {
+                if ($data->text && !$data->url) {
+                    $data->text .= "({$data->url})";
+                }
             }
             if (!property_exists($data, 'icon')) {
                 if ($icon = data_get($data, 'icon') ?? data_get($data, 'image') ?? data_get($data, 'picture')) {
