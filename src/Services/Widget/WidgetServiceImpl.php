@@ -43,7 +43,7 @@ class WidgetServiceImpl implements WidgetService
     public function buildTreeByWidgetId($widgetId, $parentId = null, $parentKey = 'parent_id') {
         $widget = $this->widgetRepository->find($widgetId);
 
-        $collection = $widget->items->map(function ($widgetItem) {
+        $collection = $widget->items->map(function ($widgetItem) use ($widget) {
             $data = $widgetItem->getData();
             if (!property_exists($data, 'parent_id')) {
                 $data->parent_id = 0;
@@ -53,6 +53,11 @@ class WidgetServiceImpl implements WidgetService
             }
             if (!property_exists($data, 'url')) {
                 $data->url = data_get($data, 'link') ?? data_get($data, 'href');
+            }
+            if ($widget->type === WidgetTypes::MENU) {
+                if ($data->text && $data->url) {
+                    $data->text .= "({$data->url})";
+                }
             }
             if (!property_exists($data, 'icon')) {
                 if ($icon = data_get($data, 'icon') ?? data_get($data, 'image') ?? data_get($data, 'picture')) {
