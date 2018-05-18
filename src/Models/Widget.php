@@ -8,7 +8,7 @@ class Widget extends Model
 {
     protected $tableConfigKey = 'widget.widgets_table';
 
-    protected $fillable = ['group_id', 'model_id', 'name', 'display_name', 'type', 'description', 'url', 'target', 'image'];
+    protected $fillable = ['group_id', 'model_id', 'name', 'display_name', 'type', 'description', 'url', 'target', 'image', 'sort'];
 
     public function group()
     {

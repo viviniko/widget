@@ -92,6 +92,7 @@ class CreateWidgetTable extends Migration
             $table->string('url')->nullable();
             $table->string('target', 32)->nullable();
             $table->string('image')->nullable();
+            $table->integer('sort')->default(0);
             $table->timestamps();
         });
 
