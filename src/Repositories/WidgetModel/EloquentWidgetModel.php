@@ -2,20 +2,12 @@
 
 namespace Viviniko\Widget\Repositories\WidgetModel;
 
-use Viviniko\Repository\SimpleRepository;
+use Viviniko\Repository\EloquentRepository;
 
-class EloquentWidgetModel extends SimpleRepository implements WidgetModelRepository
+class EloquentWidgetModel extends EloquentRepository implements WidgetModelRepository
 {
-    /**
-     * @var string
-     */
-    protected $modelConfigKey = 'widget.widget_model';
-
-    /**
-     * {@inheritdoc}
-     */
-    public function lists($column = 'name', $key = null)
+    public function __construct()
     {
-        return $this->pluck($column, $key);
+        parent::__construct('widget.widget_model');
     }
 }

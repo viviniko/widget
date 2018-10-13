@@ -3,7 +3,7 @@ namespace Viviniko\Widget\Services\Widget;
 
 use Illuminate\Support\Collection;
 use Viviniko\Catalog\Contracts\ProductService;
-use Viviniko\Widget\Contracts\WidgetService;
+use Viviniko\Widget\Services\WidgetService;
 use Viviniko\Widget\Enums\WidgetTypes;
 use Viviniko\Widget\Repositories\Widget\WidgetRepository;
 

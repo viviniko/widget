@@ -2,18 +2,18 @@
 
 namespace Viviniko\Widget\Repositories\Widget;
 
+use Viviniko\Repository\SearchRequest;
+
 interface WidgetRepository
 {
     /**
-     * Paginate the given query into a simple paginator.
+     * Search.
      *
-     * @param null $perPage
-     * @param string $searchName
-     * @param null $search
-     * @param null $order
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @param SearchRequest $searchRequest
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection
      */
-    public function paginate($perPage, $searchName = 'search', $search = null, $order = null);
+    public function search(SearchRequest $searchRequest);
 
     /**
      * Find widget by its id.

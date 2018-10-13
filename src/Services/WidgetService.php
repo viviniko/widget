@@ -1,6 +1,6 @@
 <?php
 
-namespace Viviniko\Widget\Contracts;
+namespace Viviniko\Widget\Services;
 
 use Viviniko\Widget\Services\Widget\WidgetViewer;
 

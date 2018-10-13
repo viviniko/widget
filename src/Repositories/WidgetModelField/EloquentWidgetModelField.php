@@ -2,12 +2,12 @@
 
 namespace Viviniko\Widget\Repositories\WidgetModelField;
 
-use Viviniko\Repository\SimpleRepository;
+use Viviniko\Repository\EloquentRepository;
 
-class EloquentWidgetModelField extends SimpleRepository implements WidgetModelFieldRepository
+class EloquentWidgetModelField extends EloquentRepository implements WidgetModelFieldRepository
 {
-    /**
-     * @var string
-     */
-    protected $modelConfigKey = 'widget.widget_model_field';
+    public function __construct()
+    {
+        parent::__construct('widget.widget_model_field');
+    }
 }

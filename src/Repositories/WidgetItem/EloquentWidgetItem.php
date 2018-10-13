@@ -2,12 +2,12 @@
 
 namespace Viviniko\Widget\Repositories\WidgetItem;
 
-use Viviniko\Repository\SimpleRepository;
+use Viviniko\Repository\EloquentRepository;
 
-class EloquentWidgetItem extends SimpleRepository implements WidgetItemRepository
+class EloquentWidgetItem extends EloquentRepository implements WidgetItemRepository
 {
-    /**
-     * @var string
-     */
-    protected $modelConfigKey = 'widget.widget_item';
+    public function __construct()
+    {
+        parent::__construct('widget.widget_item');
+    }
 }

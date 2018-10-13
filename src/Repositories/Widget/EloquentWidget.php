@@ -2,14 +2,15 @@
 
 namespace Viviniko\Widget\Repositories\Widget;
 
-use Viviniko\Repository\SimpleRepository;
+use Illuminate\Support\Facades\Config;
+use Viviniko\Repository\EloquentRepository;
 
-class EloquentWidget extends SimpleRepository implements WidgetRepository
+class EloquentWidget extends EloquentRepository implements WidgetRepository
 {
-    /**
-     * @var string
-     */
-    protected $modelConfigKey = 'widget.widget';
+    public function __construct()
+    {
+        parent::__construct(Config::get('widget.widget'));
+    }
 
     /**
      * @var array

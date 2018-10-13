@@ -2,25 +2,25 @@
 
 namespace Viviniko\Widget\Repositories\WidgetModel;
 
+use Viviniko\Repository\SearchRequest;
+
 interface WidgetModelRepository
 {
     /**
-     * Paginate the given query into a simple paginator.
+     * Search.
      *
-     * @param null $perPage
-     * @param string $searchName
-     * @param null $search
-     * @param null $order
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @param SearchRequest $searchRequest
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection
      */
-    public function paginate($perPage, $searchName = 'search', $search = null, $order = null);
+    public function search(SearchRequest $searchRequest);
 
     /**
      * @param string $column
      * @param null $key
      * @return mixed
      */
-    public function lists($column = 'display_name', $key = null);
+    public function pluck($column = 'display_name', $key = null);
 
     /**
      * Find widget model by its id.

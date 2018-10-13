@@ -78,7 +78,7 @@ class WidgetServiceProvider extends ServiceProvider
     {
         $this->app->singleton('widget', \Viviniko\Widget\Services\Widget\WidgetServiceImpl::class);
 
-        $this->app->alias('widget', \Viviniko\Widget\Contracts\WidgetService::class);
+        $this->app->alias('widget', \Viviniko\Widget\Services\WidgetService::class);
     }
 
     private function registerCommands()
@@ -92,7 +92,7 @@ class WidgetServiceProvider extends ServiceProvider
     {
         return [
             'widget',
-            \Viviniko\Widget\Contracts\WidgetService::class,
+            \Viviniko\Widget\Services\WidgetService::class,
         ];
     }
 }

@@ -2,21 +2,13 @@
 
 namespace Viviniko\Widget\Repositories\WidgetGroup;
 
-use Viviniko\Repository\SimpleRepository;
+use Viviniko\Repository\EloquentRepository;
 
-class EloquentWidgetGroup extends SimpleRepository implements WidgetGroupRepository
+class EloquentWidgetGroup extends EloquentRepository implements WidgetGroupRepository
 {
-    /**
-     * @var string
-     */
-    protected $modelConfigKey = 'widget.widget_group';
-
-    /**
-     * {@inheritdoc}
-     */
-    public function all()
+    public function __construct()
     {
-        return $this->createModel()->get();
+        parent::__construct('widget.widget_group');
     }
 
     /**
