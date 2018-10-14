@@ -20,7 +20,7 @@ interface WidgetModelRepository
      * @param null $key
      * @return mixed
      */
-    public function pluck($column = 'display_name', $key = null);
+    public function pluck($column, $key = null);
 
     /**
      * Find widget model by its id.
