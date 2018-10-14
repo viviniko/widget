@@ -2,7 +2,7 @@
 namespace Viviniko\Widget\Services\Widget;
 
 use Illuminate\Support\Collection;
-use Viviniko\Catalog\Contracts\ProductService;
+use Viviniko\Catalog\Services\ProductService;
 use Viviniko\Widget\Services\WidgetService;
 use Viviniko\Widget\Enums\WidgetTypes;
 use Viviniko\Widget\Repositories\Widget\WidgetRepository;
@@ -15,7 +15,7 @@ class WidgetServiceImpl implements WidgetService
     protected $widgetRepository;
 
     /**
-     * @var \Viviniko\Catalog\Contracts\ProductService
+     * @var \Viviniko\Catalog\Services\ProductService
      */
     protected $productService;
 

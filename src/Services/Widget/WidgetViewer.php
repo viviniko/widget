@@ -2,7 +2,7 @@
 
 namespace Viviniko\Widget\Services\Widget;
 
-use Viviniko\Widget\Contracts\WidgetService;
+use Viviniko\Widget\Services\WidgetService;
 use Viviniko\Widget\Enums\WidgetTypes;
 use Viviniko\Widget\Models\Widget;
 
