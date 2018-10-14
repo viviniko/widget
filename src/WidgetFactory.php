@@ -1,13 +1,13 @@
 <?php
-namespace Viviniko\Widget\Services\Widget;
+namespace Viviniko\Widget;
 
 use Illuminate\Support\Collection;
 use Viviniko\Catalog\Services\ProductService;
-use Viviniko\Widget\Services\WidgetService;
+use Viviniko\Widget\Contracts\Factory;
 use Viviniko\Widget\Enums\WidgetTypes;
 use Viviniko\Widget\Repositories\Widget\WidgetRepository;
 
-class WidgetServiceImpl implements WidgetService
+class WidgetFactory implements Factory
 {
     /**
      * @var \Viviniko\Widget\Repositories\Widget\WidgetRepository

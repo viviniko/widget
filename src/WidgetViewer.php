@@ -1,36 +1,42 @@
 <?php
 
-namespace Viviniko\Widget\Services\Widget;
+namespace Viviniko\Widget;
 
-use Viviniko\Widget\Services\WidgetService;
+use Illuminate\Support\Facades\Log;
+use Viviniko\Widget\Contracts\Factory;
 use Viviniko\Widget\Enums\WidgetTypes;
 use Viviniko\Widget\Models\Widget;
 
 class WidgetViewer
 {
-    protected $widgetService;
+    protected $factory;
 
     protected $widget;
 
     protected $template;
 
-    public function __construct(WidgetService $widgetService, Widget $widget)
+    public function __construct(Factory $factory, Widget $widget)
     {
-        $this->widgetService = $widgetService;
+        $this->factory = $factory;
         $this->widget = $widget;
     }
 
     public function items()
     {
-        $items = $this->widgetService->getWidgetData($this->widget->id);
+        $items = $this->factory->getWidgetData($this->widget->id);
 
-        if ($this->widget->type == WidgetTypes::MENU) {
-            return $this->widgetService->buildTreeByWidgetId($this->widget->id);
-        } else if ($this->widget->type == WidgetTypes::SINGLE) {
-            return $items->sortBy('sort')->first();
-        } else if ($this->widget->type == WidgetTypes::LIST) {
-            return $items->sortBy('sort');
+        try {
+            if ($this->widget->type == WidgetTypes::MENU) {
+                return $this->factory->buildTreeByWidgetId($this->widget->id);
+            } else if ($this->widget->type == WidgetTypes::SINGLE) {
+                return $items->sortBy('sort')->first();
+            } else if ($this->widget->type == WidgetTypes::LIST) {
+                return $items->sortBy('sort');
+            }
+        } catch (\Exception $e) {
+            Log::error($e->getMessage() . var_export($items));
         }
+
 
         return $items;
     }

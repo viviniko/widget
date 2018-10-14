@@ -2,7 +2,7 @@
 
 namespace Viviniko\Widget\Services;
 
-interface WidgetService
+interface WidgetGroupService
 {
     /**
      * Paginate users.
