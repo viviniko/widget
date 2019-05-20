@@ -26,7 +26,7 @@ class WidgetFactory implements Factory
 
     public function make($name)
     {
-        $widget = $this->widgetRepository->findByName($name);
+        $widget = $this->widgetRepository->findBy('name', $name);
 
         return $widget ? new WidgetViewer($this, $widget) : null;
     }

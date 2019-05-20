@@ -76,31 +76,6 @@ class WidgetServiceProvider extends ServiceProvider
 
     private function registerService()
     {
-        $this->app->singleton(
-            \Viviniko\Widget\Services\WidgetModelFieldService::class,
-            \Viviniko\Widget\Services\Impl\WidgetModelFieldServiceImpl::class
-        );
-
-        $this->app->singleton(
-            \Viviniko\Widget\Services\WidgetModelService::class,
-            \Viviniko\Widget\Services\Impl\WidgetModelServiceImpl::class
-        );
-
-        $this->app->singleton(
-            \Viviniko\Widget\Services\WidgetGroupService::class,
-            \Viviniko\Widget\Services\Impl\WidgetGroupServiceImpl::class
-        );
-
-        $this->app->singleton(
-            \Viviniko\Widget\Services\WidgetItemService::class,
-            \Viviniko\Widget\Services\Impl\WidgetItemServiceImpl::class
-        );
-
-        $this->app->singleton(
-            \Viviniko\Widget\Services\WidgetService::class,
-            \Viviniko\Widget\Services\Impl\WidgetServiceImpl::class
-        );
-
         $this->app->singleton('widget', \Viviniko\Widget\WidgetFactory::class);
 
         $this->app->alias('widget', \Viviniko\Widget\Contracts\Factory::class);
@@ -118,11 +93,6 @@ class WidgetServiceProvider extends ServiceProvider
         return [
             'widget',
             \Viviniko\Widget\Contracts\Factory::class,
-            \Viviniko\Widget\Services\WidgetService::class,
-            \Viviniko\Widget\Services\WidgetModelFieldService::class,
-            \Viviniko\Widget\Services\WidgetModelService::class,
-            \Viviniko\Widget\Services\WidgetGroupService::class,
-            \Viviniko\Widget\Services\WidgetItemService::class,
         ];
     }
 }

@@ -11,12 +11,4 @@ class EloquentWidgetGroup extends EloquentRepository implements WidgetGroupRepos
     {
         parent::__construct(Config::get('widget.widget_group'));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function lists($column = 'name', $key = null)
-    {
-        return $this->pluck($column, $key);
-    }
 }
