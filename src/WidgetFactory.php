@@ -2,6 +2,8 @@
 namespace Viviniko\Widget;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Viviniko\Catalog\Services\ProductService;
 use Viviniko\Widget\Contracts\Factory;
 use Viviniko\Widget\Enums\WidgetTypes;
@@ -29,6 +31,18 @@ class WidgetFactory implements Factory
         $widget = $this->widgetRepository->findBy('name', $name);
 
         return $widget ? new WidgetViewer($this, $widget) : null;
+    }
+
+    public function render($name)
+    {
+        return Cache::remember("widgets/{$name}/view", Config::get('cache.ttl'), function () use ($name) {
+            return $this->make($name)->render();
+        });
+    }
+
+    public function flush($name)
+    {
+        return Cache::forget("widgets/{$name}/view");
     }
 
     public function getWidgetData($widgetId)
