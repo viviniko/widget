@@ -33,9 +33,9 @@ class WidgetFactory implements Factory
         return $widget ? new WidgetViewer($this, $widget) : null;
     }
 
-    public function render($name)
+    public function render($name, $ttl = null)
     {
-        return Cache::remember("widgets/{$name}/view", Config::get('cache.ttl'), function () use ($name) {
+        return Cache::remember("widgets/{$name}/view", $ttl ?: Config::get('cache.ttl'), function () use ($name) {
             return $this->make($name)->render();
         });
     }
