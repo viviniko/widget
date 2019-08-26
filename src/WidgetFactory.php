@@ -35,15 +35,21 @@ class WidgetFactory implements Factory
 
     public function render($name, $ttl = null)
     {
-        return Cache::remember("widgets/{$name}/view", $ttl ?: Config::get('cache.ttl'), function () use ($name) {
+        if (is_array($name)) {
+            $view = $name[1];
+            $name = $name[0];
+        } else {
+            $view = $name;
+        }
+        return Cache::tags(['widgets.' . $name])->remember("widgets/{$name}/{$view}", $ttl ?: Config::get('cache.ttl'), function () use ($name, $view) {
             $viewer = $this->make($name);
-            return $viewer ? $viewer->render() : "";
+            return $viewer ? $viewer->render($view) : "";
         });
     }
 
     public function flush($name)
     {
-        return Cache::forget("widgets/{$name}/view");
+        return Cache::tags(['widgets.' . $name])->flush();
     }
 
     public function getWidgetData($widgetId)

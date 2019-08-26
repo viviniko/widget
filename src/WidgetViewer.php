@@ -13,8 +13,6 @@ class WidgetViewer
 
     protected $widget;
 
-    protected $template;
-
     public function __construct(Factory $factory, Widget $widget)
     {
         $this->factory = $factory;
@@ -43,18 +41,19 @@ class WidgetViewer
 
     public function render($template = null)
     {
-        if (!$template) {
-            foreach (["widgets.{$this->widget->group->name}.{$this->widget->name}", "widgets.{$this->widget->name}"] as $view) {
-                if (view()->exists($view)) {
-                    $template = $view;
-                    break;
-                }
+        $views = ["widgets.{$this->widget->group->name}.{$this->widget->name}", "widgets.{$this->widget->name}"];
+        if ($template) {
+            $views = [$template, "widgets.{$this->widget->group->name}.{$template}", "widgets.{$template}"] + $views;
+        }
+
+        foreach ($views as $view) {
+            if (view()->exists($view)) {
+                $template = $view;
+                break;
             }
         }
 
-        $this->template = $template;
-
-        return view($this->template, array_merge($this->widget->getAttributes(), [
+        return view($template, array_merge($this->widget->getAttributes(), [
             ($this->widget->type == 'Single' ? 'item' : 'items') => $this->items()
         ]))->render();
     }
